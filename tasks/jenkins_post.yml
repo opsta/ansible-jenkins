@@ -1,0 +1,8 @@
+---
+- name: Get initial admin password
+  shell: cat /var/lib/jenkins/secrets/initialAdminPassword
+  register: jenkins_initial_admin_password
+
+- name: Initial admin password is
+  debug:
+    msg: "{{ jenkins_initial_admin_password.stdout }}"

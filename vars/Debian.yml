@@ -1,0 +1,4 @@
+---
+jenkins_apt_package: jenkins
+jenkins_apt_key_url: https://pkg.jenkins.io/debian/jenkins.io.key
+jenkins_apt_repo: deb http://pkg.jenkins.io/debian-stable binary/

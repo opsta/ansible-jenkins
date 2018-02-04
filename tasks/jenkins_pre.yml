@@ -1,0 +1,8 @@
+---
+- name: Add jenkins repository key
+  apt_key:
+    url: "{{ jenkins_apt_key_url }}"
+
+- name: Add jenkins apt-repository
+  apt_repository:
+    repo: "{{ jenkins_apt_repo }}"
