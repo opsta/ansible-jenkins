@@ -8,8 +8,10 @@ galaxy_info:
   platforms:
   - name: Ubuntu
     versions:
-    - trusty
     - xenial
+  - name: RedHat
+    versions:
+    - 7
   galaxy_tags:
     - Jenkins
     - CI

@@ -1,6 +1,14 @@
 ---
-- name: Install Jenkins
+- name: Install Jenkins (Debian/Ubuntu)
+  when: ansible_os_family == "Debian"
   apt:
     name: "{{ jenkins_apt_package }}"
+    state: present
+    update_cache: yes
+
+- name: Install Jenkins (RedHat)
+  when: ansible_os_family == "RedHat"
+  yum:
+    name: "{{ jenkins_yum_package }}"
     state: present
     update_cache: yes
