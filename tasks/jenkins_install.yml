@@ -1,6 +1,7 @@
 ---
 - name: Install Jenkins (Debian/Ubuntu)
   when: ansible_os_family == "Debian"
+  register: jenkins_installed
   apt:
     name: "{{ jenkins_apt_package }}"
     state: present
@@ -8,10 +9,15 @@
 
 - name: Install Jenkins (RedHat)
   when: ansible_os_family == "RedHat"
+  register: jenkins_installed
   yum:
     name: "{{ jenkins_yum_package }}"
     state: present
     update_cache: yes
+
+- name: Register variable to check Jenkins is installed
+  set_fact:
+    task_install_changed: jenkins_installed.changed
 
 - name: Ensure Jenkins service is started and enabled
   systemd:
