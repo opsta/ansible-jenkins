@@ -1,11 +1,13 @@
 ---
 - name: Wait until initial admin password is appear
   wait_for:
+    timeout: 180
     path: /var/lib/jenkins/secrets/initialAdminPassword
 
 - name: Get initial admin password
   shell: cat /var/lib/jenkins/secrets/initialAdminPassword
   register: jenkins_initial_admin_password
+  changed_when: "jenkins_initial_admin_password.stdout|float < 2"
 
 - name: Initial admin password is
   debug:
