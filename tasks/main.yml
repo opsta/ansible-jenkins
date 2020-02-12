@@ -9,6 +9,5 @@
 
 - block: # Config Jenkins
   - include_tasks: jenkins_post.yml
-  when: task_install_changed | bool
   tags:
     - jenkins-config

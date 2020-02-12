@@ -2,10 +2,9 @@
 - name: Ensure remotely host has require dependencies
   when: ansible_os_family == "Debian"
   apt:
-    name: "{{ item }}"
+    name: "{{ standard_dep }}"
     state: present
     update_cache: yes
-  with_items: "{{ standard_dep }}"
 
 - name: Add jenkins repository key (Debian/Ubuntu)
   when: ansible_os_family == "Debian"

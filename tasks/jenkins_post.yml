@@ -1,14 +1,17 @@
 ---
 - name: Wait until initial admin password is appear
+  register: find_init_token
   wait_for:
-    timeout: 180
+    timeout: 60
     path: /var/lib/jenkins/secrets/initialAdminPassword
 
-- name: Get initial admin password
-  command: cat /var/lib/jenkins/secrets/initialAdminPassword
-  register: jenkins_initial_admin_password
-  changed_when: false
-
-- name: Initial admin password is
-  debug:
-    msg: "{{ jenkins_initial_admin_password.stdout }}"
+- name: Retry for expose initial password
+  when: task_install_changed | bool or not find_init_token.failed
+  block:
+    - name: Get initial admin password
+      command: cat /var/lib/jenkins/secrets/initialAdminPassword
+      register: jenkins_initial_admin_password
+      changed_when: false
+    - name: Initial admin password is
+      debug:
+        msg: "{{ jenkins_initial_admin_password.stdout }}"
