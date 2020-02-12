@@ -7,7 +7,12 @@
     state: present
     update_cache: yes
 
-- name: Install Jenkins (RedHat)
+- name: Register variable to check Jenkins is installed (Debian/Ubuntu)
+  when: ansible_os_family == "Debian"
+  set_fact:
+    task_install_changed: jenkins_installed.changed
+
+- name: Install Jenkins (CentOS/RedHat)
   when: ansible_os_family == "RedHat"
   register: jenkins_installed
   yum:
@@ -15,7 +20,8 @@
     state: present
     update_cache: yes
 
-- name: Register variable to check Jenkins is installed
+- name: Register variable to check Jenkins is installed (CentOS/RedHat)
+  when: ansible_os_family == "RedHat"
   set_fact:
     task_install_changed: jenkins_installed.changed
 
