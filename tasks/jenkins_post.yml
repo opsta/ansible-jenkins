@@ -5,9 +5,9 @@
     path: /var/lib/jenkins/secrets/initialAdminPassword
 
 - name: Get initial admin password
-  shell: cat /var/lib/jenkins/secrets/initialAdminPassword
+  command: cat /var/lib/jenkins/secrets/initialAdminPassword
   register: jenkins_initial_admin_password
-  changed_when: "jenkins_initial_admin_password.stdout|float < 2"
+  changed_when: false
 
 - name: Initial admin password is
   debug:
