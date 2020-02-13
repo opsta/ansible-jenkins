@@ -1,4 +1,9 @@
 ---
+# List of package that require for run this roles
+# and should installed on master host to run job.
+# All package name in list will use on apt or yum
+# module, so you ensure this correct name for 
+# packages manager require name.
 standard_dep: #[]
   - gpg
   - curl
