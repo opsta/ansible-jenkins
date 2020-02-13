@@ -2,7 +2,7 @@
 - name: Ensure remotely host has require dependencies
   when: ansible_os_family == "Debian"
   apt:
-    name: "{{ standard_dep }}"
+    name: "{{ jenkins_standard_dep }}"
     state: present
     update_cache: yes
 

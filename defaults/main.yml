@@ -4,7 +4,7 @@
 # All package name in list will use on apt or yum
 # module, so you ensure this correct name for 
 # packages manager require name.
-standard_dep: #[]
+jenkins_standard_dep: #[]
   - gpg
   - curl
   - git
