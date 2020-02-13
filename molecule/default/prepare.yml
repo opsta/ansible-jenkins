@@ -1,0 +1,19 @@
+---
+- name: Prepare
+  hosts: all
+  gather_facts: true
+  tasks: #[]
+    - name: Install Java package (Ubuntu/Debian)
+      apt:
+        name: "openjdk-8-jdk"
+        state: present
+        update_cache: yes
+      when: ansible_os_family == 'Debian'
+
+    - name: Install Java package (CentOS/RHEL)
+      yum:
+        name: "java-1.8.0-openjdk"
+        state: present
+        update_cache: yes
+      when: ansible_os_family == 'RedHat'
+
