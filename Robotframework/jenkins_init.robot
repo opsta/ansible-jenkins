@@ -4,7 +4,7 @@ Library         SeleniumLibrary         timeout=900
 ${URL}                      http://localhost:8080
 ${BROWSER}                  headlesschrome
 ${input_SECRETS}            xpath=//input[@class='form-control']
-${SECRETS}                  714dd585a6534527b20b699f12b27b5d
+${SECRETS}                  f5153d23a74c4d1eb22d3c3b73bfb49f
 ${button}                   xpath=//input[@value='Continue']
 ${install_suggested}        xpath=//*[@id="main-panel"]/div/div/div/div/div/div[2]/div/p[2]/a[1]
 ${createadmin_iframe}       //*[@id="setup-first-user"]
