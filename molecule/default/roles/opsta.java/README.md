@@ -1,4 +1,4 @@
-# Ansible Role: Jenkins
+# Ansible Role: Java
 
 
 
@@ -18,7 +18,7 @@ None.
 
     - hosts: all
       roles:
-        - ansible-jenkins
+        - ansible-java
 
 
 ## License

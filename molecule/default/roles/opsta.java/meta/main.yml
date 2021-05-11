@@ -1,20 +1,21 @@
 ---
 galaxy_info:
-  role-name: ansible-jenkins
   author: Opsta
-  description: Ansible role to install and config Jenkins
+  description: Ansible role to install and config Java
   company: "Opsta (Thailand) Co.,Ltd."
   license: "MIT"
   min_ansible_version: 2.4
   platforms:
   - name: Ubuntu
     versions:
+    - trusty
     - xenial
-  - name: RedHat
+    - bionic
+  - name: EL
     versions:
     - 7
   galaxy_tags:
-    - jenkins
-    - ci
-    - cd
+    - java
+    - openjdk
+    - jdk
 dependencies: []

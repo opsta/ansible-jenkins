@@ -5,9 +5,7 @@ driver:
   name: docker
 lint: |
     set -e
-    yamllint .
-    ansible-lint .
-    flake8
+    ansible-lint ../../etc
 platforms:
 
   # - name: rhel8
@@ -59,7 +57,7 @@ platforms:
   #   capabilities:
   #     - SYS_ADMIN
   #   command: '/lib/systemd/systemd'
-  
+
 provisioner:
   name: ansible
   lint:
