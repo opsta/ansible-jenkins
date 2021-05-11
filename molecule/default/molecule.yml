@@ -3,31 +3,62 @@ dependency:
   name: galaxy
 driver:
   name: docker
-lint:
-  name: yamllint
-  options:
-    config-data:
-      ignore: |
-        ../../
+lint: |
+    set -e
+    yamllint .
+    ansible-lint .
+    flake8
 platforms:
-  - name: bionic
-    image: paulfantom/ubuntu-molecule:18.04
+
+  - name: rhel8
+    image: registry.stage.redhat.io/ubi8/ubi:8.3
     docker_host: "${DOCKER_HOST:-unix://var/run/docker.sock}"
     privileged: true
+    published_ports:
+      - "0.0.0.0:8080:8080/tcp"
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
-  # - name: xenial
-  #   image: paulfantom/ubuntu-molecule:16.04
-  #   docker_host: "${DOCKER_HOST:-unix://var/run/docker.sock}"
-  #   privileged: true
-  #   volumes:
-  #     - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    pre_build_image: true
+    capabilities:
+      - SYS_ADMIN
+    command: '/lib/systemd/systemd'
+
+  - name: Focal
+    # image: geerlingguy/docker-ubuntu2004-ansible:latest
+    image: quay.io/ansible/ubuntu2004-test-container
+    docker_host: "${DOCKER_HOST:-unix://var/run/docker.sock}"
+    privileged: true
+    published_ports:
+      - "0.0.0.0:8080:8080/tcp"
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    capabilities:
+      - SYS_ADMIN
+    command: '/lib/systemd/systemd'
+
   # - name: centos7
-  #   image: paulfantom/centos-molecule:7
+  #   image: geerlingguy/docker-centos7-ansible:python3
   #   docker_host: "${DOCKER_HOST:-unix://var/run/docker.sock}"
   #   privileged: true
+  #   published_ports:
+  #     - "0.0.0.0:8080:8080/tcp"
   #   volumes:
   #     - /sys/fs/cgroup:/sys/fs/cgroup:ro
+  #   capabilities:
+  #     - SYS_ADMIN
+  #   command: '/lib/systemd/systemd'
+
+  # - name: centos8
+  #   image: geerlingguy/docker-centos8-ansible:latest
+  #   docker_host: "${DOCKER_HOST:-unix://var/run/docker.sock}"
+  #   privileged: true
+  #   published_ports:
+  #     - "0.0.0.0:8080:8080/tcp"
+  #   volumes:
+  #     - /sys/fs/cgroup:/sys/fs/cgroup:ro
+  #   capabilities:
+  #     - SYS_ADMIN
+  #   command: '/lib/systemd/systemd'
 provisioner:
   name: ansible
   lint:
