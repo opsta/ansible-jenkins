@@ -4,9 +4,10 @@ Library         SeleniumLibrary         timeout=900
 ${URL}                      http://localhost:8080
 ${BROWSER}                  headlesschrome
 ${input_SECRETS}            xpath=//input[@class='form-control']
-${SECRETS}                  f5153d23a74c4d1eb22d3c3b73bfb49f
+${SECRETS}                  CHANGEME
 ${button}                   xpath=//input[@value='Continue']
 ${install_suggested}        xpath=//*[@id="main-panel"]/div/div/div/div/div/div[2]/div/p[2]/a[1]
+
 ${createadmin_iframe}       //*[@id="setup-first-user"]
 ${input_USERNAME}           xpath=//*[@id="create-admin-user"]/form/div[1]/table/tbody/tr[1]/td[2]/input
 ${input_PASSWORD1}          xpath=//*[@id="create-admin-user"]/form/div[1]/table/tbody/tr[2]/td[2]/input
@@ -18,6 +19,7 @@ ${PASSWORD}                 password
 ${FULL_NAME}                adminjar
 ${EMAIL}                    admin@gmail.com
 ${firstAdminCreate}         //*[@id="create-admin-user"]/form/h1
+
 ${saveandcontinue}          //*[@id="main-panel"]/div/div/div/div/div/div[3]/button[2]
 ${saveandfinish}            //*[@id="main-panel"]/div/div/div/div/div/div[3]/button[2]
 ${installdone}              //*[@id="main-panel"]/div/div/div/div/div/div[2]/div/button

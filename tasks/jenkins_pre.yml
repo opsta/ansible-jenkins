@@ -31,8 +31,4 @@
     gpgkey: "{{ jenkins_yum_key_url }}"
     gpgcheck: yes
 
-- name: install jenkins standar dep (RedHat)
-  when: ansible_os_family == "RedHat"
-  ansible.builtin.yum:
-    name: gpg
-    state: latest
+

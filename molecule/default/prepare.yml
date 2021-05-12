@@ -2,7 +2,14 @@
 - name: Prepare
   hosts: all 
   become: yes
+  become_method: su
   gather_facts: true
+  tasks:
+    - name: install jenkins standar dep (RedHat)
+      when: ansible_os_family == "RedHat"
+      ansible.builtin.yum:
+        name: initscripts
+        state: latest
   roles:
     - opsta.java
   # tasks: #[]
