@@ -12,25 +12,19 @@ jobs:
       - uses: actions/checkout@v2
         with:
           path: "${{ github.repository }}"
-      - name: show dir
-        run: ls -l  ${{ github.repository }}
-      - name: Molecule converge
-        uses: gofrolist/molecule-action@v2
-        with:
-          molecule_command: converge
-      - name: show tmp
-        run: ls -l /tmp  
-      - name: test file
-        run: cat /tmp/inti_passowrd.txt"
-      - name: Robot Framework
-        uses: joonvena/robotframework-docker-action@v0.1
-        env:
-          BROWSER: chrome
-          ROBOT_TESTS_DIR: ${{ github.workspace }}/${{ github.repository }}/Robotframework/
-      - name: Molecule destroy
-        uses: gofrolist/molecule-action@v2
-        with:
-          molecule_command: destroy
+      # - name: Molecule converge
+      #   uses: gofrolist/molecule-action@v2
+      #   with:
+      #     molecule_command: converge
+      # - name: Robot Framework
+      #   uses: joonvena/robotframework-docker-action@v0.1
+      #   env:
+      #     BROWSER: chrome
+      #     ROBOT_TESTS_DIR: ${{ github.workspace }}/${{ github.repository }}/Robotframework/
+      # - name: Molecule destroy
+      #   uses: gofrolist/molecule-action@v2
+      #   with:
+      #     molecule_command: destroy
       - name: Molecule test
         uses: gofrolist/molecule-action@v2
         with:
