@@ -13,7 +13,7 @@ jobs:
         with:
           path: "${{ github.repository }}"
       - name: show dir
-        run: ls -l  ${{ github.actor }}/${{ github.repository }}/
+        run: ls -l  ${{ github.actor }}/
       - name: Molecule converge
         uses: gofrolist/molecule-action@v2
         with:
