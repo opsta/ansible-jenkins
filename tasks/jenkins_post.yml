@@ -18,5 +18,12 @@
     - name: Write admin password to File
       ansible.builtin.copy:
         content: "{{ jenkins_initial_admin_password.stdout }}"
-        dest: "/tmp/inti_password.txt"
+        dest: /tmp/inti_password.txt
       delegate_to: localhost
+      register: jenkins_initial_admin_password_file
+    - name: Create the file, if it doesnt exist already
+      ansible.builtin.copy:
+        content: "{{ jenkins_initial_admin_password.stdout }}"
+        dest: /tmp/inti_password.txt
+      delegate_to: localhost
+      when: not jenkins_initial_admin_password_file.stat.exists
