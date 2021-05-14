@@ -30,5 +30,3 @@
     baseurl: "{{ jenkins_yum_repo }}"
     gpgkey: "{{ jenkins_yum_key_url }}"
     gpgcheck: yes
-
-

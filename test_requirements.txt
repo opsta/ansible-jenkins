@@ -1,6 +1,10 @@
 ansible-lint>=3.4.0
 docker
 jmespath
-molecule>=2.15.0
+molecule>=3.3.0
+molecule-docker
 pytest==3.9.3
 testinfra>=1.7.0
+yamllint>=1.26.1
+python-apt
+tox

@@ -25,13 +25,13 @@
   ansible.builtin.set_fact:
     task_install_changed: jenkins_installed.changed
 
-# - name: Ensure Jenkins service is started and enabled
-#   ansible.builtin.service:
-#     name: jenkins
-#     state: started
-#     enabled: yes
-
 - name: Ensure Jenkins service is started and enabled
+  ansible.builtin.service:
+    name: jenkins
+    state: started
+    enabled: yes
+
+- name: Ensure Jenkins systemd is started and enabled
   ansible.builtin.systemd:
     name: jenkins
     state: started

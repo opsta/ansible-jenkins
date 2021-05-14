@@ -1,0 +1,32 @@
+name: Install Jenkins and User acceptence test
+
+on: 
+  push:
+    branches:
+      - master
+      - dev
+jobs:
+  molecule:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          path: "${{ github.repository }}"
+      - name: Molecule converge
+        uses: gofrolist/molecule-action@v2
+        with:
+          molecule_command: converge
+      - name: Robot Framework
+        uses: joonvena/robotframework-docker-action@v0.1
+        env:
+          BROWSER: chrome
+          ROBOT_TESTS_DIR: ${{ github.workspace }}/Robotframework
+          ROBOT_REPORTS_DIR: ${{ github.workspace }}/reports
+      - name: Molecule destroy
+        uses: gofrolist/molecule-action@v2
+        with:
+          molecule_command: destroy
+      - name: Molecule destroy
+        uses: gofrolist/molecule-action@v2
+        with:
+          molecule_command: test

@@ -15,8 +15,8 @@
     - name: Initial admin password is
       ansible.builtin.debug:
         msg: "{{ jenkins_initial_admin_password.stdout }}"
-    # - neme: Write admin password to File
-    #   ansible.builtin.copy:
-    #     content: "{{ jenkins_initial_admin_password.stdout }}"
-    #     dest: "/tmp/inti_passowrd.txt"
-    #   delegate_to: localhost
+    - name: Write admin password to File
+      ansible.builtin.copy:
+        content: "{{ jenkins_initial_admin_password.stdout }}"
+        dest: "/Robotframework/inti_passowrd.txt"
+      delegate_to: localhost

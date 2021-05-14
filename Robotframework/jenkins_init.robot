@@ -1,10 +1,13 @@
 *** Settings ***
-Library         SeleniumLibrary         timeout=900
+Documentation   Jenkins Init
+Library         SeleniumLibrary         timeout=600
+Library         OperatingSystem
+Variables       /tmp/inti_passowrd.py
 *** Variables ***
 ${URL}                      http://localhost:8080
 ${BROWSER}                  headlesschrome
 ${input_SECRETS}            xpath=//input[@class='form-control']
-${SECRETS}                  CHANGEME
+# ${SECRETS}                  Get File        /tmp/inti_passowrd.txt
 ${button}                   xpath=//input[@value='Continue']
 ${install_suggested}        xpath=//*[@id="main-panel"]/div/div/div/div/div/div[2]/div/p[2]/a[1]
 
@@ -31,7 +34,9 @@ ${DELAY}    2
 open
     Open Browser                        ${URL}  ${BROWSER}
 Jenkins input secrets
+    ${SECRETS}                          Get File        /Robotframework/inti_passowrd.txt
     Input Password                      ${input_SECRETS}  ${SECRETS}
+    Log                                 ${SECRETS}
     Set Selenium Speed                  ${DELAY}
     Click Element                       ${button}
     Set Selenium Speed                  ${DELAY} 

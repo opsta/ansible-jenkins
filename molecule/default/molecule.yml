@@ -5,6 +5,7 @@ driver:
   name: docker
 lint: |
     set -e
+    yamllint .
     ansible-lint ../../etc
 platforms:
 
@@ -71,7 +72,6 @@ platforms:
 
 provisioner:
   name: ansible
-  log: true
   lint:
     name: ansible-lint
     options:
@@ -85,7 +85,4 @@ provisioner:
 scenario:
   name: default
 verifier:
-  name: testinfra
-  lint:
-    name: flake8
-    enabled: true
+  name: ansible
