@@ -25,7 +25,7 @@ platforms:
   #   image: registry.access.redhat.com/ubi7/ubi
   #   docker_host: "${DOCKER_HOST:-unix://var/run/docker.sock}"
   #   privileged: True
-  #   published_ports:
+  #   published_ports
   #     - "0.0.0.0:8080:8080/tcp"
   #   volumes:
   #     - /sys/fs/cgroup:/sys/fs/cgroup:ro

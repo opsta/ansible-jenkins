@@ -14,10 +14,14 @@ jobs:
           path: "${{ github.repository }}"
       - name: show dir
         run: ls -l  ${{ github.repository }}
+      - name: show tmp
+        run: ls -l /tmp  
       - name: Molecule converge
         uses: gofrolist/molecule-action@v2
         with:
           molecule_command: converge
+      - name: test file
+        run: cat /tmp/inti_passowrd.txt"
       - name: Robot Framework
         uses: joonvena/robotframework-docker-action@v0.1
         env:
