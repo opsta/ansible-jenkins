@@ -16,6 +16,8 @@ jobs:
         uses: gofrolist/molecule-action@v2
         with:
           molecule_command: converge
+      - name: show dir
+        run: ls -l    
       - name: Robot Framework
         uses: joonvena/robotframework-docker-action@v0.1
         env:
@@ -26,7 +28,7 @@ jobs:
         uses: gofrolist/molecule-action@v2
         with:
           molecule_command: destroy
-      - name: Molecule destroy
+      - name: Molecule test
         uses: gofrolist/molecule-action@v2
         with:
           molecule_command: test
