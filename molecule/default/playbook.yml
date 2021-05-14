@@ -5,7 +5,7 @@
   become_method: su
   gather_facts: true
   any_errors_fatal: true
-  pre_tasks:
+  tasks:
     - name: install jenkins standar dep (RedHat)
       when: ansible_os_family == "RedHat"
       ansible.builtin.yum:

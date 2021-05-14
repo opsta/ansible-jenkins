@@ -79,7 +79,6 @@ provisioner:
         - meta/
   playbooks:
     create: create.yml
-    prepare: prepare.yml
     converge: playbook.yml
     destroy: destroy.yml
 scenario:
