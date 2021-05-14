@@ -23,7 +23,6 @@ jobs:
         env:
           BROWSER: chrome
           ROBOT_TESTS_DIR: ${{ github.workspace }}/${{ github.repository }}/Robotframework/
-          ROBOT_REPORTS_DIR: ${{ github.workspace }}/${{ github.repository }}/reports
       - name: Molecule destroy
         uses: gofrolist/molecule-action@v2
         with:
