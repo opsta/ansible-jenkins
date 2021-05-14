@@ -18,5 +18,5 @@
     - name: Write admin password to File
       ansible.builtin.copy:
         content: "{{ jenkins_initial_admin_password.stdout }}"
-        dest: "/tmp/inti_passowrd.txt"
+        dest: "/tmp/inti_password.txt"
       delegate_to: localhost
