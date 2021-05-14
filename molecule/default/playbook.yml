@@ -11,10 +11,6 @@
       ansible.builtin.yum:
         name: initscripts
         state: latest
-  tasks:
-    - name: "ansible java role"
-      include_role:
-        name: "opsta.java"
-    - name: "ansible jenkins role"
-      include_role:
-        name: "ansible-jenkins"
+  roles:
+    - opsta.java
+    - ansible-jenkins
