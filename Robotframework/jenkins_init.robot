@@ -34,7 +34,7 @@ ${DELAY}    2
 open
     Open Browser                        ${URL}  ${BROWSER}
 Jenkins input secrets
-    ${SECRETS}                          Get File        /Robotframework/inti_passowrd.txt
+    ${SECRETS}                          Get File        /tmp/inti_passowrd.txt
     Input Password                      ${input_SECRETS}  ${SECRETS}
     Log                                 ${SECRETS}
     Set Selenium Speed                  ${DELAY}
