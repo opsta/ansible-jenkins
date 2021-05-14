@@ -13,7 +13,7 @@ jobs:
         with:
           path: "${{ github.repository }}"
       - name: show dir
-        run: ls -l  ${{ github.actor }}/
+        run: ls -l  ${{ github.repository }}
       - name: Molecule converge
         uses: gofrolist/molecule-action@v2
         with:
@@ -22,8 +22,8 @@ jobs:
         uses: joonvena/robotframework-docker-action@v0.1
         env:
           BROWSER: chrome
-          ROBOT_TESTS_DIR: ${{ github.workspace }}/${{ github.actor }}/${{ github.repository }}/Robotframework/
-          ROBOT_REPORTS_DIR: ${{ github.workspace }}/${{ github.actor }}/${{ github.repository }}/reports
+          ROBOT_TESTS_DIR: ${{ github.workspace }}/${{ github.repository }}/Robotframework/
+          ROBOT_REPORTS_DIR: ${{ github.workspace }}/${{ github.repository }}/reports
       - name: Molecule destroy
         uses: gofrolist/molecule-action@v2
         with:
