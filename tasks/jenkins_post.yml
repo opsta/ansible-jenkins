@@ -19,11 +19,3 @@
       ansible.builtin.copy:
         content: "{{ jenkins_initial_admin_password.stdout }}"
         dest: /tmp/inti_password.txt
-      delegate_to: localhost
-    - name: try get admin password from create file
-      ansible.builtin.command: cat /tmp/inti_password.txt
-      register: jenkins_initial_admin_password_from_file
-      delegate_to: localhost
-    - name: Initial admin password is
-      ansible.builtin.debug:
-        msg: "{{ jenkins_initial_admin_password_from_file.stdout }}"

@@ -13,25 +13,44 @@ def AnsibleDefaults(Ansible):
         return yaml.load(stream)
 
 
-@pytest.mark.parametrize("dirs", [
+@pytest.mark.parametrize("dirs_debian", [
     "/var/lib/jenkins",
     "/usr/share/jenkins",
     "/var/log/jenkins/"
 ])
-def test_directories(host, dirs):
-    d = host.file(dirs)
-    assert d.is_directory
-    assert d.exists
+@pytest.mark.parametrize("dirs_redhat", [
+    "/var/lib/jenkins",
+    "/usr/lib/jenkins",
+    "/var/log/jenkins/"
+])
+def test_directories(host, dirs_debian, dirs_redhat):
+    if host.system_info.distribution == 'debian':
+        d = host.file(dirs_debian)
+        assert d.is_directory
+        assert d.exists
+    if host.system_info.distribution == 'redhat':
+        d = host.file(dirs_redhat)
+        assert d.is_directory
+        assert d.exists
+    
 
-
-@pytest.mark.parametrize("files", [
+@pytest.mark.parametrize("files_debian", [
     "/var/lib/jenkins/secrets/initialAdminPassword",
     "/usr/share/jenkins/jenkins.war"
 ])
-def test_files(host, files):
-    f = host.file(files)
-    assert f.exists
-    assert f.is_file
+@pytest.mark.parametrize("files_redhat", [
+    "/var/lib/jenkins/secrets/initialAdminPassword",
+    "/usr/lib/jenkins/jenkins.war"
+])
+def test_files(host, files_debian, files_redhat):
+    if host.system_info.distribution == 'debian':
+        f = host.file(files_debian)
+        assert f.exists
+        assert f.is_file
+    if host.system_info.distribution == 'redhat':
+        f = host.file(files_redhat)
+        assert f.exists
+        assert f.is_file
 
 
 # @pytest.mark.parametrize("files", [
@@ -47,16 +66,24 @@ def test_files(host, files):
 
 def test_service(host):
     s = host.service("jenkins")
-    # assert s.is_enabled
+    assert s.is_enabled
     assert s.is_running
 
 
-@pytest.mark.parametrize("ports", [
+@pytest.mark.parametrize("ports_debian", [
     "tcp://0.0.0.0:8080"
 ])
-def test_socket(host, ports):
-    s = host.socket(ports)
-    assert s.is_listening
+@pytest.mark.parametrize("ports_redhat", [
+    "tcp://:::8080"
+])
+def test_socket(host, ports_debian, ports_redhat):
+    if host.system_info.distribution == 'debian':
+        s = host.socket(ports_debian)
+        assert s.is_listening
+    if host.system_info.distribution == 'redhat':
+        s = host.socket(ports_redhat)
+        assert s.is_listening
+    
 
 
 # def test_version(host, AnsibleDefaults):

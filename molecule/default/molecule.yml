@@ -6,8 +6,20 @@ driver:
 lint: |
     set -e
     yamllint .
-    ansible-lint ../../etc
+    ansible-lint ../../tasks
 platforms:
+
+  - name: instance-${TOX_ENVNAME}
+    image: ${MOLECULE_DISTRO}
+    docker_host: "${DOCKER_HOST:-unix://var/run/docker.sock}"
+    privileged: True
+    published_ports:
+      - "0.0.0.0:8080:8080/tcp"
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    capabilities:
+      - SYS_ADMIN
+    command: '/lib/systemd/systemd'
 
   # - name: rhel8
   #   image: registry.access.redhat.com/ubi8/ubi
@@ -33,18 +45,18 @@ platforms:
   #     - SYS_ADMIN
   #   command: '/lib/systemd/systemd'
 
-  - name: Focal
-    # image: geerlingguy/docker-ubuntu2004-ansible:latest
-    image: quay.io/ansible/ubuntu2004-test-container
-    docker_host: "${DOCKER_HOST:-unix://var/run/docker.sock}"
-    privileged: true
-    published_ports:
-      - "0.0.0.0:8080:8080/tcp"
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
-    capabilities:
-      - SYS_ADMIN
-    command: '/lib/systemd/systemd'
+  # - name: Focal
+  #   # image: geerlingguy/docker-ubuntu2004-ansible:latest
+  #   image: quay.io/ansible/ubuntu2004-test-container
+  #   docker_host: "${DOCKER_HOST:-unix://var/run/docker.sock}"
+  #   privileged: true
+  #   published_ports:
+  #     - "0.0.0.0:8080:8080/tcp"
+  #   volumes:
+  #     - /sys/fs/cgroup:/sys/fs/cgroup:ro
+  #   capabilities:
+  #     - SYS_ADMIN
+  #   command: '/lib/systemd/systemd'
 
   # - name: centos7
   #   image: geerlingguy/docker-centos7-ansible:python3
@@ -84,4 +96,21 @@ provisioner:
 scenario:
   name: default
 verifier:
-  name: ansible
+  name: robotframework
+  libraries:
+    - robotframework-seleniumlibrary
+  test_data:
+    - ${MOLECULE_SCENARIO_DIRECTORY}/robot/
+  resources:
+    - /tmp/inti_password.txt
+  options:
+    exitonerror: yes
+    exclude: bogus
+    report: index.html
+  data_sources:
+    - jenkins_init.robot
+    - jenkins_login.robot  
+  # name: testinfra
+  # lint:
+  #   name: flake8
+  #   enabled: true
