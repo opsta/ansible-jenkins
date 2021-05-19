@@ -1,17 +1,22 @@
 ---
 - name: Wait until initial admin password is appear
   register: is_find_init_token
-  wait_for:
-    timeout: 60
+  ansible.builtin.wait_for:
+    timeout: 120
     path: /var/lib/jenkins/secrets/initialAdminPassword
 
 - name: Retry for expose initial password
   when: task_install_changed | bool or not is_find_init_token.failed
   block:
     - name: Get initial admin password
-      command: cat /var/lib/jenkins/secrets/initialAdminPassword
+      ansible.builtin.command: cat /var/lib/jenkins/secrets/initialAdminPassword
       register: jenkins_initial_admin_password
       changed_when: false
     - name: Initial admin password is
-      debug:
+      ansible.builtin.debug:
         msg: "{{ jenkins_initial_admin_password.stdout }}"
+    #NOTE enable robot framework to read jenkins initial admin password
+    # - name: Write admin password to File
+    #   ansible.builtin.copy:
+    #     content: "{{ jenkins_initial_admin_password.stdout }}"
+    #     dest: /tmp/inti_password.txt

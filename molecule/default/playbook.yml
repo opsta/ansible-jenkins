@@ -1,6 +1,22 @@
 ---
 - name: Run role
   hosts: all
+  become: yes
+  become_method: su
+  gather_facts: true
   any_errors_fatal: true
-  roles:
-    - ansible-jenkins
+  
+  pre_tasks:
+  - name: install jenkins standar dep (RedHat)
+    ansible.builtin.yum:
+      name: initscripts
+      state: latest
+    when: ansible_distribution == "RedHat"
+      
+  tasks:
+  - name: "install java"
+    include_role:
+      name: "opsta.java" 
+  - name: "install jenkins"
+    include_role:
+      name: "ansible-jenkins" 
