@@ -3,8 +3,8 @@ Documentation   Jenkins Init
 Library         SeleniumLibrary         timeout=600
 Library         OperatingSystem
 *** Variables ***
-${INIT_URL}                      http://localhost:8080
-${BROWSER}                  headlesschrome
+${INIT_URL}                 http://localhost:8080
+${BROWSER}                  headlessfirefox
 ${input_SECRETS}            xpath=//input[@class='form-control']
 # ${SECRETS}                  Get File        /tmp/inti_passowrd.txt
 ${button}                   xpath=//input[@value='Continue']
@@ -43,6 +43,9 @@ Open Headless Chrome Browser to Page
     ${chrome_options}=     Set Chrome Options
     Create Webdriver       Chrome  chrome_options=${chrome_options}
         
+Open firefox
+    Open Browser                        ${INIT_URL}     ${BROWSER}  
+
 Jenkins input secrets
     ${SECRETS}                          Get File        /tmp/inti_password.txt
     Input Password                      ${input_SECRETS}  ${SECRETS}
@@ -84,7 +87,8 @@ Instance configuration
     Capture Page Screenshot  
 *** Test Cases ***
 start
-    Open Headless Chrome Browser to Page    ${INIT_URL}
+    # Open Headless Chrome Browser to Page    ${INIT_URL}
+    Open firefox
 inti secrets
     Jenkins input secrets
 install plugin    

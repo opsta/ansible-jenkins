@@ -5,12 +5,13 @@
   become_method: su
   gather_facts: true
   any_errors_fatal: true
+  
   pre_tasks:
   - name: install jenkins standar dep (RedHat)
     ansible.builtin.yum:
       name: initscripts
       state: latest
-    when: ansible_distribution == "RedHat"  
+    when: ansible_distribution == "RedHat"
       
   tasks:
   - name: "install java"

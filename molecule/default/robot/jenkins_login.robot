@@ -2,7 +2,7 @@
 Library         SeleniumLibrary     
 *** Variables ***
 ${URL}                      http://localhost:8080
-${BROWSER}                  headlesschrome
+${BROWSER}                  headlessfirefox
 
 ${input_USERNAME}           //*[@id="j_username"]
 ${input_PASSWORD}           //*[@name="j_password"]
